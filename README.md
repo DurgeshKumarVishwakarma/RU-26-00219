@@ -154,7 +154,6 @@ Game events are also printed to the console, for example `Obstacle passed. Score
 | VS Code shows an import warning | Press `Ctrl+Shift+P`, choose **Python: Select Interpreter** and pick the Python where pygame is installed |
 | High score does not save | The game folder may be read-only; the score is then saved in your home folder instead |
 | Reset the high score | Delete `highscore.txt` |
-```
 
 ## License
 
