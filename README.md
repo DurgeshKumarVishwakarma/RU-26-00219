@@ -155,6 +155,17 @@ Game events are also printed to the console, for example `Obstacle passed. Score
 | High score does not save | The game folder may be read-only; the score is then saved in your home folder instead |
 | Reset the high score | Delete `highscore.txt` |
 
+## Upload to GitHub
+
+```bash
+git init
+git add .
+git commit -m "Car Racing Game using Pygame"
+git branch -M main
+git remote add origin https://github.com/<your-username>/car-racing-game.git
+git push -u origin main
+```
+
 ## License
 
 Free to use for learning and study projects.
