@@ -1,160 +1,147 @@
-# 🏎️ Car Racing Game
+# 🏎️ Car Racing Game (PS 49)
 
-A 2D car racing game built with **Python 3** and **Pygame**. Choose your car, steer left and right on a three-lane road, dodge the oncoming traffic and beat your own high score.
+A 2D car racing game built with **Python 3** and **Pygame**. Steer your car left and right, dodge the traffic coming down the road, and earn a point for every obstacle you pass. One crash and it's Game Over!
 
-> **PS No. 49** · Concepts: Pygame, Collision Detection, Game Loop
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Pygame](https://img.shields.io/badge/Pygame-2.x-green)
+![Tests](https://img.shields.io/badge/Tests-unittest-brightgreen)
 
-<p align="center">
-  <img src="screenshots/menu.png" width="230" alt="Car selection menu">
-  <img src="screenshots/gameplay.png" width="230" alt="Gameplay">
-  <img src="screenshots/gameover.png" width="230" alt="Game over with new record">
-</p>
+**Concepts covered:** Pygame · Collision Detection (`Rect.colliderect`) · Game Loop
 
-## Table of contents
+---
 
-- [Features](#features)
-- [Quick start](#quick-start)
-- [Controls](#controls)
-- [How to play](#how-to-play)
-- [Game specification](#game-specification)
-- [Test cases](#test-cases)
-- [Project structure](#project-structure)
-- [How the code works](#how-the-code-works)
-- [Troubleshooting](#troubleshooting)
-- [Upload to GitHub](#upload-to-github)
+## 📑 Table of Contents
 
-## Features
+1. [Features](#-features)
+2. [Specification](#-specification)
+3. [Controls](#-controls)
+4. [Installation and Run](#-installation-and-run)
+5. [Running the Tests](#-running-the-tests)
+6. [Project Structure](#-project-structure)
+7. [How It Works](#-how-it-works)
+8. [Troubleshooting](#-troubleshooting)
 
-- 🚗 **4 selectable cars:** Sports Car, Sedan, Taxi and Police Car, each drawn in code with windscreen, wheels, headlights, tail lights and style details
-- 🚦 **Random traffic** in different colours and styles, appearing at random positions on the road
-- 💥 **Collision detection** with `Rect.colliderect()`
-- 🏆 **Saved high score** in `highscore.txt`, shown during the game and on the Game Over screen
-- ✨ **Live record update:** the Best score turns gold the moment you beat the old record, and Game Over shows **NEW RECORD!**
-- 🖱️ **Keyboard and mouse/touch support**
-- 📦 **Single file, no setup:** installs pygame automatically if it is missing
-- ✅ **27 built-in tests** covering every test case, with no extra test file needed
+---
 
-## Quick start
+## ✨ Features
 
-**Requirements:** Python 3.8 or newer. Works on Windows, macOS and Linux.
+- Smooth 60 FPS gameplay in a 400 × 600 window
+- Keyboard steering that stays inside the road boundaries
+- Randomly placed obstacle cars that move down the road
+- Score that goes up for every obstacle you pass
+- Collision detection with `Rect.colliderect()`
+- Game Over screen with your final score and quick restart
+- Obstacles speed up slowly as your score grows (capped for fairness)
+- Logic separated from drawing, so it can be tested without opening a window
 
-```bash
-# 1. Download or clone the project, then go into the folder
-cd car-racing-game
+---
 
-# 2. Play (pygame is installed automatically if missing)
-python car_racing_game.py
-```
-
-On some macOS and Linux systems use `python3` instead of `python`.
-
-To install pygame yourself instead:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Controls
-
-| Screen | Key | Action |
-|---|---|---|
-| Car menu | ← / → | Change car |
-| Car menu | ENTER | Start the game |
-| Game | ← | Move left 10 px (stops at the road edge, x = 50) |
-| Game | → | Move right 10 px (stops at the road edge, x = 310) |
-| Game | Any other key | Ignored |
-| Game Over | R | Restart with the same car |
-| Game Over | C | Back to the car menu |
-| Any screen | ESC | Quit |
-
-**Mouse / touch:** click the left or right side of the window to steer or change car, click the middle of the menu to start, and click anywhere after Game Over to restart.
-
-## How to play
-
-1. Pick your car on the menu and press **ENTER**.
-2. Steer with the arrow keys and avoid the traffic coming down the road.
-3. Every car you pass gives **+1 point**.
-4. The game ends when you hit a car. Press **R** to try again or **C** to change car.
-5. Your best score is saved automatically, so close the game and come back to beat it.
-
-## Game specification
+## 📐 Specification
 
 | Item | Value |
 |---|---|
-| Window | 400 × 600 px, 60 FPS |
-| Road | x = 50 to x = 350 |
-| Player car | 40 × 80 px at y = 500, starts at x = 180 |
-| Player movement | 10 px per key press, kept inside the road |
-| Obstacle cars | 40 × 80 px, random x on the road, move 5 px per frame |
-| Spawn rate | One new obstacle every 60 frames (1 second) |
-| Score | +1 for each obstacle that leaves the bottom of the screen |
-| Game over | Player car collides with an obstacle |
+| Window | 400 × 600 pixels, 60 FPS |
+| Road | x = 50 to 350 |
+| Player car | 40 × 80, at y = 500, starts at x = 180, moves 10 px per key press |
+| Obstacle cars | 40 × 80, random x on the road, move downwards |
+| Score | +1 for each obstacle that passes the bottom of the screen |
+| Game over | Collision with an obstacle. Shows "Game Over" and the final score |
+| Restart | Press **R** after Game Over |
 
-## Test cases
+---
 
-Run all tests (no window opens, and your real high score is never changed):
+## 🎮 Controls
+
+| Key | Action |
+|---|---|
+| ⬅️ LEFT arrow | Move left 10 px (stops at the road edge, x = 50) |
+| ➡️ RIGHT arrow | Move right 10 px (stops at the road edge, x = 310) |
+| **R** | Restart after Game Over |
+| **ESC** | Quit |
+| Any other key | Ignored |
+
+---
+
+## 🚀 Installation and Run
+
+**Requirements:** Python 3.8 or newer.
 
 ```bash
-python car_racing_game.py --test
+# 1. Clone the repository
+git clone https://github.com/<your-username>/car-racing-game.git
+cd car-racing-game
+
+# 2. (Optional) create a virtual environment
+python -m venv venv
+venv\Scripts\activate          # Windows
+source venv/bin/activate       # macOS / Linux
+
+# 3. Install the dependency
+pip install -r requirements.txt
+
+# 4. Start the game
+python car_racing.py
 ```
 
-| # | Test case | Input | Expected output | Status |
-|---|---|---|---|---|
-| 1 | Normal input | x = 180, key RIGHT | `Player car x = 190 \| Score: 0 \| Game running` | ✅ |
-| 2a | Boundary | x = 50, key LEFT | No movement, stays on road (x = 50) | ✅ |
-| 2b | Boundary | x = 310, key RIGHT | No movement, stays on road (x = 310) | ✅ |
-| 3 | Invalid input | Key SPACE | `Key ignored. Player car x = 180 \| Game running` | ✅ |
-| 4a | Valid scenario | Score 3, obstacle at (300, 600) leaves the screen | `Obstacle passed. Score: 4` | ✅ |
-| 4b | Valid scenario | Obstacle at (200, 520), player car at (180, 500) | `Collision detected \| Game Over \| Final Score: 4` | ✅ |
+---
 
-The suite also tests the high score (save, load, new record, lower score, damaged file), the car menu, restart, obstacle spawning and a short run of the real game loop.
+## 🧪 Running the Tests
 
-## Project structure
+```bash
+python -m unittest -v
+```
+
+The tests run **headless** (no window needed) and cover every test case:
+
+| Test case | Input | Expected output |
+|---|---|---|
+| 1. Normal | x = 180, RIGHT | x = 190, Score 0, Game running |
+| 2a. Boundary | x = 50, LEFT | x = 50, no movement |
+| 2b. Boundary | x = 310, RIGHT | x = 310, no movement |
+| 3. Invalid | SPACE | Key ignored, x = 180, Game running |
+| 4a. Valid | Score 3, obstacle at (300, 600) leaves the screen | Obstacle passed, Score 4 |
+| 4b. Valid | Obstacle at (200, 520), player at (180, 500) | Collision detected, Game Over, Final Score 4 |
+
+---
+
+## 📁 Project Structure
 
 ```
 car-racing-game/
-├── car_racing_game.py   # complete game + built-in tests (one file)
+├── car_racing.py        # Game class, drawing and game loop
+├── test_car_racing.py   # Unit tests for all test cases
 ├── requirements.txt     # pygame
 ├── README.md
-├── screenshots/         # images used in this README
-└── .gitignore           # keeps highscore.txt out of GitHub
+└── .gitignore
 ```
 
-## How the code works
+---
 
-The game data lives in one dictionary called `game`, and the code is made of simple functions with no classes:
+## ⚙️ How It Works
 
-```python
-game = {"player_x": 180, "score": 0, "obstacles": [[x, y, car], ...],
-        "game_over": False, "high_score": 0, "new_record": False, "car": 0, ...}
+- **`Game`** holds all the logic (player, obstacles, score, game over). It needs no window, so it can be tested directly.
+- **`Game.handle_key()`** processes one key press and returns the console message.
+- **`Game.update()`** moves obstacles, checks collisions with `colliderect()`, and scores obstacles that leave the screen.
+- **`run()`** is the game loop: handle events → update → draw → `clock.tick(60)`.
+
+```
+Start → Handle events → Update (move, collide, score) → Draw → Repeat at 60 FPS
+                                   │
+                          Collision? ──► Game Over ──► R to restart
 ```
 
-| Function | Job |
-|---|---|
-| `new_game()` | Create a fresh game dictionary |
-| `move_player()` | Move the car left or right inside the road |
-| `handle_key()` | Handle one key press and return the console message |
-| `handle_click()` | Mouse/touch steering and restart |
-| `spawn_obstacle()` | Add a traffic car at the top of the screen |
-| `update_game()` | Move obstacles, detect collisions, count score, update the record |
-| `run_one_frame()` | Spawn timer plus one update |
-| `load_high_score()` / `save_high_score()` | Read and write `highscore.txt` |
-| `build_car()` | Draw a car (sports, sedan, taxi, police) with pygame shapes |
-| `draw_menu()` / `draw_game()` | Draw the car menu, the road and the Game Over screen |
-| `main()` | The game loop: events → update → draw → `clock.tick(60)` |
+---
 
-Game events are also printed to the console, for example `Obstacle passed. Score: 4`.
-
-## Troubleshooting
+## 🛠️ Troubleshooting
 
 | Problem | Fix |
 |---|---|
-| `No module named pygame` | Run `python -m pip install pygame`. On Python 3.13 or newer, if that fails, use `python -m pip install pygame-ce` |
-| `python` not found | Use `python3` (macOS/Linux) or `py` (Windows) |
-| VS Code shows an import warning | Press `Ctrl+Shift+P`, choose **Python: Select Interpreter** and pick the Python where pygame is installed |
-| High score does not save | The game folder may be read-only; the score is then saved in your home folder instead |
-| Reset the high score | Delete `highscore.txt` |
+| `ModuleNotFoundError: No module named 'pygame'` | Run `pip install -r requirements.txt` and make sure your editor uses the same Python interpreter |
+| `No module named car_racing` when testing | Run the tests from the project folder, where `car_racing.py` is located |
+| No window appears on a remote or headless machine | The game needs a display. The tests do not |
 
-## License
+---
 
-Free to use for learning and study projects.
+## 📜 License
+
+Made for the PS 49 Python project. Free to use for learning.
